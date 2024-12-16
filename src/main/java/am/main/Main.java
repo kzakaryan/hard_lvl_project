@@ -1,17 +1,68 @@
 package am.main;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import server.Database;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        Database db = new Database();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            // Read the user input
+            String command = scanner.nextLine();
+            String[] parts = command.split(" ", 3);
+
+            switch (parts[0]) {
+                case "set":
+                    if (parts.length == 3) {
+                        try {
+                            int index = Integer.parseInt(parts[1]);
+                            String text = parts[2];
+                            System.out.println(db.set(index, text)); // Call set and output result
+                        } catch (NumberFormatException e) {
+                            System.out.println("ERROR");
+                        }
+                    } else {
+                        System.out.println("ERROR");
+                    }
+                    break;
+
+                case "get":
+                    if (parts.length == 2) {
+                        try {
+                            int index = Integer.parseInt(parts[1]);
+                            System.out.println(db.get(index)); // Call get and output result
+                        } catch (NumberFormatException e) {
+                            System.out.println("ERROR");
+                        }
+                    } else {
+                        System.out.println("ERROR");
+                    }
+                    break;
+
+                case "delete":
+                    if (parts.length == 2) {
+                        try {
+                            int index = Integer.parseInt(parts[1]);
+                            System.out.println(db.delete(index)); // Call delete and output result
+                        } catch (NumberFormatException e) {
+                            System.out.println("ERROR");
+                        }
+                    } else {
+                        System.out.println("ERROR");
+                    }
+                    break;
+
+                case "exit":
+                    System.out.println("Bye!");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("ERROR");
+            }
         }
     }
 }
