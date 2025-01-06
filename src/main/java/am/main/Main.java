@@ -10,7 +10,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            // Read the user input
             String command = scanner.nextLine();
             String[] parts = command.split(" ", 3);
 
