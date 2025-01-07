@@ -127,7 +127,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Main-Class>viewer/src/main/java/Main</Main-Class>
+                            <Main-Class>src/main/java/main/Main.java</Main-Class>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -253,7 +253,6 @@
         </plugins>
     </build>
 
-
     <reporting>
         <plugins>
             <plugin>
@@ -269,5 +268,4 @@
             </plugin>
         </plugins>
     </reporting>
-
 </project>
