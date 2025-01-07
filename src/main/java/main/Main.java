@@ -1,4 +1,4 @@
-package am.main;
+package main;
 
 import server.Database;
 import java.util.Scanner;
