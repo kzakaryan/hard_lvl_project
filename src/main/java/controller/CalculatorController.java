@@ -13,20 +13,29 @@ import java.util.Scanner;
  */
 public class CalculatorController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CalculatorController.class);
+    private Logger logger = LoggerFactory.getLogger(CalculatorController.class);
     private final VariableStorage variableStorage;
     private final ExpressionEvaluator evaluator;
+    private final Scanner scanner;
 
     public CalculatorController() {
         this.variableStorage = new VariableStorage();
         this.evaluator = new ExpressionEvaluator(variableStorage);
+        this.scanner = new Scanner(System.in);
+    }
+
+    public CalculatorController(VariableStorage variableStorage, ExpressionEvaluator evaluator, Scanner scanner, Logger logger) {
+        this.variableStorage = variableStorage;
+        this.evaluator = evaluator;
+        this.scanner = scanner;
+        this.logger = logger;
     }
 
     /**
      * Main program loop that continuously processes user commands.
      */
     public void run() {
-        try (Scanner scanner = new Scanner(System.in)) {
+        try {
             String input;
             while (true) {
                 System.out.print("Enter command: ");
