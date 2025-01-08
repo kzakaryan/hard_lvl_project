@@ -1,6 +1,8 @@
 package controller;
 
 import expression.ExpressionEvaluator;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import model.VariableStorage;
 import org.slf4j.*;
 import java.math.BigDecimal;
@@ -11,6 +13,7 @@ import java.util.Scanner;
  * Controller class to manage user input, output, and execution of commands.
  * Handles the interaction between the user and the calculator system.
  */
+@RequiredArgsConstructor
 public class CalculatorController {
 
     private static final Logger logger = LoggerFactory.getLogger(CalculatorController.class);

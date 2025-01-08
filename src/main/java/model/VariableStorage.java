@@ -19,5 +19,4 @@ public class VariableStorage {
     public void storeVariable(String variableName, BigDecimal value) {
         variables.put(variableName, value);
     }
-
 }
