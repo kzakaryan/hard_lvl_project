@@ -5,10 +5,8 @@ import model.VariableStorage;
 import org.junit.jupiter.api.*;
 import org.mockito.*;
 import org.slf4j.Logger;
-
 import java.math.BigDecimal;
 import java.util.Scanner;
-
 import static org.mockito.Mockito.*;
 
 /**

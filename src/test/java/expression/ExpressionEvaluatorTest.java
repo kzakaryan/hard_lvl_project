@@ -17,7 +17,6 @@ class ExpressionEvaluatorTest {
 
     @BeforeEach
     void setUp() {
-        // Mock the VariableStorage class
         variableStorage = mock(VariableStorage.class);
         evaluator = new ExpressionEvaluator(variableStorage);
     }
@@ -26,11 +25,7 @@ class ExpressionEvaluatorTest {
     void testProcessEquationValid() {
         String equation = "x = 3 + 5 * 2";
         BigDecimal expected = new BigDecimal("13");
-
-        // Call the processEquation method
         evaluator.processEquation(equation);
-
-        // Verify that storeVariable was called with the correct arguments
         verify(variableStorage).storeVariable("x", expected);
     }
 
@@ -38,9 +33,7 @@ class ExpressionEvaluatorTest {
     void testEvaluateValidExpression() {
         String expression = "3 + 5 * 2";
         BigDecimal expected = new BigDecimal("13");
-
         BigDecimal result = evaluator.evaluate(expression);
-
         assertEquals(expected, result);
     }
 
@@ -48,9 +41,7 @@ class ExpressionEvaluatorTest {
     void testEvaluateExpressionWithParentheses() {
         String expression = "(3 + 5) * 2";
         BigDecimal expected = new BigDecimal("16");
-
         BigDecimal result = evaluator.evaluate(expression);
-
         assertEquals(expected, result);
     }
 
@@ -58,9 +49,7 @@ class ExpressionEvaluatorTest {
     void testEvaluateExpressionWithDivision() {
         String expression = "10 / 2 + 3";
         BigDecimal expected = new BigDecimal("8");
-
         BigDecimal result = evaluator.evaluate(expression);
-
         assertEquals(expected, result);
     }
 
@@ -68,27 +57,21 @@ class ExpressionEvaluatorTest {
     void testEvaluateExpressionWithExponentiation() {
         String expression = "2 ^ 3 + 4";
         BigDecimal expected = new BigDecimal("12");
-
         BigDecimal result = evaluator.evaluate(expression);
-
         assertEquals(expected, result);
     }
 
     @Test
     void testEvaluateInvalidExpression() {
         String expression = "3 + * 5";
-
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> evaluator.evaluate(expression));
-
         assertEquals("Invalid expression: not enough operands for operator +", exception.getMessage());
     }
 
     @Test
     void testProcessEquationWithInvalidExpression() {
         String equation = "y = 3 + * 5";
-
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> evaluator.processEquation(equation));
-
         assertEquals("Invalid expression: not enough operands for operator +", exception.getMessage());
     }
 
@@ -96,10 +79,7 @@ class ExpressionEvaluatorTest {
     void testProcessEquationWithStoredResult() {
         String equation = "z = 3 + 5";
         BigDecimal expected = new BigDecimal("8");
-
         evaluator.processEquation(equation);
-
-        // Verify that the result is stored in the variable storage
         verify(variableStorage).storeVariable("z", expected);
     }
 
@@ -107,9 +87,7 @@ class ExpressionEvaluatorTest {
     void testEvaluateExpressionWithNegativeResult() {
         String expression = "5 - 10";
         BigDecimal expected = new BigDecimal("-5");
-
         BigDecimal result = evaluator.evaluate(expression);
-
         assertEquals(expected, result);
     }
 }
