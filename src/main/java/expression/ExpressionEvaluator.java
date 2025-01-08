@@ -3,6 +3,7 @@ package expression;
 import model.VariableStorage;
 import org.slf4j.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Responsible for evaluating mathematical expressions and handling equations.
@@ -44,11 +45,11 @@ public class ExpressionEvaluator {
     public BigDecimal evaluate(String expression) {
         try {
             String cleanedExpression = expressionParser.clean(expression);
-            BigDecimal result = postfixConverter.calculatePostfix(postfixConverter.convertToPostfix(cleanedExpression));
-            return result;
+            List<String> postfix = postfixConverter.convertToPostfix(cleanedExpression);
+            return postfixConverter.calculatePostfix(postfix);
         } catch (IllegalArgumentException e) {
             logger.warn("Invalid expression: {}", expression);
-            throw new IllegalArgumentException("Invalid expression.");
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 }
