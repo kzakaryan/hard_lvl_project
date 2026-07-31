@@ -66,6 +66,9 @@ public class PostfixConverter {
             if (token.matches("-?\\d+(\\.\\d+)?")) {
                 stack.push(new BigDecimal(token));
             } else {
+                if (stack.size() < 2) {
+                    throw new IllegalArgumentException("Invalid expression: not enough operands for operator " + token);
+                }
                 BigDecimal b = stack.pop();
                 BigDecimal a = stack.pop();
 
@@ -89,6 +92,10 @@ public class PostfixConverter {
                         throw new IllegalArgumentException("Unknown operator: " + token);
                 }
             }
+        }
+
+        if (stack.size() != 1) {
+            throw new IllegalArgumentException("Invalid expression: incomplete or malformed expression.");
         }
 
         return stack.pop();
